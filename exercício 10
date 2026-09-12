@@ -1,0 +1,144 @@
+#include <stdio.h>
+
+#define TAM 3
+
+void inicializarTabuleiro(char tabuleiro[TAM][TAM])
+{
+    int i, j;
+    for (i = 0; i < TAM; i++)
+        for (j = 0; j < TAM; j++)
+            tabuleiro[i][j] = ' ';
+}
+
+void exibirTabuleiro(char tabuleiro[TAM][TAM])
+{
+    int i;
+
+    printf("\n");
+    for (i = 0; i < TAM; i++)
+    {
+        printf(" %c | %c | %c \n", tabuleiro[i][0], tabuleiro[i][1], tabuleiro[i][2]);
+        if (i < TAM - 1)
+            printf("---|---|---\n");
+    }
+    printf("\n");
+}
+
+int jogadaValida(char tabuleiro[TAM][TAM], int linha, int coluna)
+{
+    if (linha < 0 || linha >= TAM || coluna < 0 || coluna >= TAM)
+        return 0;
+
+    if (tabuleiro[linha][coluna] != ' ')
+        return 0;
+
+    return 1;
+}
+
+void fazerJogada(char tabuleiro[TAM][TAM], int linha, int coluna, char simbolo)
+{
+    tabuleiro[linha][coluna] = simbolo;
+}
+
+int verificarVitoria(char tabuleiro[TAM][TAM], char simbolo)
+{
+    int i;
+
+    for (i = 0; i < TAM; i++)
+    {
+        if (tabuleiro[i][0] == simbolo &&
+            tabuleiro[i][1] == simbolo &&
+            tabuleiro[i][2] == simbolo)
+            return 1;
+    }
+
+    for (i = 0; i < TAM; i++)
+    {
+        if (tabuleiro[0][i] == simbolo &&
+            tabuleiro[1][i] == simbolo &&
+            tabuleiro[2][i] == simbolo)
+            return 1;
+    }
+
+    if (tabuleiro[0][0] == simbolo &&
+        tabuleiro[1][1] == simbolo &&
+        tabuleiro[2][2] == simbolo)
+        return 1;
+
+    if (tabuleiro[0][2] == simbolo &&
+        tabuleiro[1][1] == simbolo &&
+        tabuleiro[2][0] == simbolo)
+        return 1;
+
+    return 0;
+}
+
+int verificarEmpate(char tabuleiro[TAM][TAM])
+{
+    int i, j;
+
+    for (i = 0; i < TAM; i++)
+        for (j = 0; j < TAM; j++)
+            if (tabuleiro[i][j] == ' ')
+                return 0; 
+
+    return 1; 
+}
+
+int main()
+{
+    char tabuleiro[TAM][TAM];
+    int linha, coluna;
+    int jogador = 1; 
+    char simbolo;
+    int jogoAtivo = 1;
+
+    printf("=== Exercicio 10 - Jogo da Velha ===\n\n");
+
+    inicializarTabuleiro(tabuleiro);
+
+    printf("Jogador 1: X  |  Jogador 2: O\n");
+    printf("Posicoes: linha e coluna (0 a 2)\n");
+
+    exibirTabuleiro(tabuleiro);
+
+    while (jogoAtivo)
+    {
+
+        simbolo = (jogador == 1) ? 'X' : 'O';
+
+        printf("Jogador %d (%c)\n", jogador, simbolo);
+        printf("Linha (0-2): ");
+        scanf("%d", &linha);
+        printf("Coluna (0-2): ");
+        scanf("%d", &coluna);
+
+        if (!jogadaValida(tabuleiro, linha, coluna))
+        {
+            printf("\n*** Jogada invalida! Posicao ocupada ou fora dos limites. Tente novamente. ***\n\n");
+            continue;
+        }
+
+        fazerJogada(tabuleiro, linha, coluna, simbolo);
+
+        exibirTabuleiro(tabuleiro);
+
+        if (verificarVitoria(tabuleiro, simbolo))
+        {
+            printf("*** Jogador %d (%c) VENCEU! ***\n", jogador, simbolo);
+            jogoAtivo = 0;
+        }
+
+        else if (verificarEmpate(tabuleiro))
+        {
+            printf("*** EMPATE! Nenhum jogador venceu. ***\n");
+            jogoAtivo = 0;
+        }
+        else
+        {
+            jogador = (jogador == 1) ? 2 : 1;
+        }
+    }
+
+    return 0;
+}
