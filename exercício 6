@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX 100
+
+int main()
+{
+    char nome[MAX];
+    int i, tam;
+    int vogais = 0, consoantes = 0, espacos = 0;
+
+    printf("=== Exercicio 6 - Manipulacao de Strings ===\n\n");
+
+    printf("Digite seu nome completo: ");
+    fgets(nome, MAX, stdin);
+
+    nome[strcspn(nome, "\n")] = '\0';
+
+    tam = strlen(nome);
+
+    for (i = 0; i < tam; i++)
+    {
+        char c = tolower(nome[i]);
+
+        if (c == ' ')
+        {
+            espacos++;
+        }
+        else if (c >= 'a' && c <= 'z')
+        {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+                vogais++;
+            else
+                consoantes++;
+        }
+    }
+
+    printf("\n--- Resultado ---\n");
+    printf("Quantidade de caracteres: %d\n", tam);
+    printf("Quantidade de vogais: %d\n", vogais);
+    printf("Quantidade de consoantes: %d\n", consoantes);
+    printf("Quantidade de espacos em branco: %d\n", espacos);
+
+    return 0;
+}
