@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+#define LIN 5
+#define COL 5
+
+int main()
+{
+    int matriz[LIN][COL];
+    int i, j;
+    int maior, linha_maior, coluna_maior;
+
+    printf("=== Exercicio 5 - Maior Elemento da Matriz ===\n\n");
+
+    printf("Digite os elementos da matriz (5x5):\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("M[%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+
+    maior = matriz[0][0];
+    linha_maior = 0;
+    coluna_maior = 0;
+
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            if (matriz[i][j] > maior)
+            {
+                maior = matriz[i][j];
+                linha_maior = i;
+                coluna_maior = j;
+            }
+        }
+    }
+
+    printf("\n--- Resultado ---\n");
+    printf("Maior elemento: %d\n", maior);
+    printf("Linha: %d\n", linha_maior);
+    printf("Coluna: %d\n", coluna_maior);
+
+    return 0;
+}
