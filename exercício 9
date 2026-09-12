@@ -1,0 +1,99 @@
+#include <stdio.h>
+
+#define MAX_ALUNOS 50
+
+int lerNotas(float notas[])
+{
+    int n, i;
+
+    printf("Quantos alunos ha na turma? (max %d): ", MAX_ALUNOS);
+    scanf("%d", &n);
+
+    if (n > MAX_ALUNOS)
+        n = MAX_ALUNOS;
+
+    for (i = 0; i < n; i++)
+    {
+        printf("Nota do aluno %d: ", i + 1);
+        scanf("%f", &notas[i]);
+    }
+
+    return n;
+}
+
+float calcularMedia(float notas[], int n)
+{
+    float soma = 0;
+    int i;
+
+    for (i = 0; i < n; i++)
+        soma += notas[i];
+
+    return soma / n;
+}
+
+float encontrarMaiorNota(float notas[], int n)
+{
+    float maior = notas[0];
+    int i;
+
+    for (i = 1; i < n; i++)
+    {
+        if (notas[i] > maior)
+            maior = notas[i];
+    }
+
+    return maior;
+}
+
+float encontrarMenorNota(float notas[], int n)
+{
+    float menor = notas[0];
+    int i;
+
+    for (i = 1; i < n; i++)
+    {
+        if (notas[i] < menor)
+            menor = notas[i];
+    }
+
+    return menor;
+}
+
+void imprimirRelatorio(float notas[], int n, float media,
+                       float maior, float menor)
+{
+    int i;
+
+    printf("\n========================================\n");
+    printf("       RELATORIO DA TURMA\n");
+    printf("========================================\n");
+
+    printf("\nNotas cadastradas:\n");
+    for (i = 0; i < n; i++)
+        printf("  Aluno %d: %.2f\n", i + 1, notas[i]);
+
+    printf("\n--- Estatisticas ---\n");
+    printf("Media da turma:     %.2f\n", media);
+    printf("Maior nota:         %.2f\n", maior);
+    printf("Menor nota:         %.2f\n", menor);
+    printf("Total de alunos:    %d\n", n);
+    printf("========================================\n");
+}
+
+int main()
+{
+    float notas[MAX_ALUNOS];
+    int qtd;
+    float media, maior, menor;
+
+    printf("=== Exercicio 9 - Modularizando um Programa ===\n\n");
+
+    qtd = lerNotas(notas);
+    media = calcularMedia(notas, qtd);
+    maior = encontrarMaiorNota(notas, qtd);
+    menor = encontrarMenorNota(notas, qtd);
+    imprimirRelatorio(notas, qtd, media, maior, menor);
+
+    return 0;
+}
