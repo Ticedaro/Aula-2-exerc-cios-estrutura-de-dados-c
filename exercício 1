@@ -1,0 +1,35 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+#define TAM 10
+
+int main()
+{
+    int vetor[TAM];
+    int i;
+
+    printf("=== Exercicio 1 - Vetores (Basico) ===\n\n");
+    
+    printf("Digite %d numeros inteiros:\n", TAM);
+    for (i = 0; i < TAM; i++)
+    {
+        printf("Posicao %d: ", i);
+        scanf("%d", &vetor[i]);
+    }
+
+    printf("\nValores na ordem digitada:\n");
+    for (i = 0; i < TAM; i++)
+    {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+
+    printf("\nValores na ordem inversa:\n");
+    for (i = TAM - 1; i >= 0; i--)
+    {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
