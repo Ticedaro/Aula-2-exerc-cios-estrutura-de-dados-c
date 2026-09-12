@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+#define TAM 15
+
+int main()
+{
+    int vetor[TAM];
+    int i, numero;
+    int encontrado = 0;
+    int posicao = -1;
+
+    printf("=== Exercicio 3 - Busca em Vetores ===\n\n");
+
+    printf("Digite %d numeros inteiros:\n", TAM);
+    for (i = 0; i < TAM; i++)
+    {
+        printf("Posicao %d: ", i);
+        scanf("%d", &vetor[i]);
+    }
+
+    printf("\nDigite um numero para pesquisar: ");
+    scanf("%d", &numero);
+
+    for (i = 0; i < TAM; i++)
+    {
+        if (vetor[i] == numero)
+        {
+            encontrado = 1;
+            posicao = i;
+            break;
+        }
+    }
+
+    if (encontrado)
+    {
+        printf("\nNumero %d encontrado na posicao %d do vetor.\n", numero, posicao);
+    }
+    else
+    {
+        printf("\nNumero %d NAO foi encontrado no vetor.\n", numero);
+    }
+
+    return 0;
+}
