@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#define LIN 3
+#define COL 3
+
+int main()
+{
+    int matA[LIN][COL], matB[LIN][COL], matC[LIN][COL];
+    int i, j;
+
+    printf("=== Exercicio 4 - Soma de Matrizes ===\n\n");
+
+    printf("Digite os elementos da Matriz A (3x3):\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("A[%d][%d]: ", i, j);
+            scanf("%d", &matA[i][j]);
+        }
+    }
+
+    printf("\nDigite os elementos da Matriz B (3x3):\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%d", &matB[i][j]);
+        }
+    }
+
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            matC[i][j] = matA[i][j] + matB[i][j];
+        }
+    }
+
+    printf("\n--- Matriz A ---\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("%4d ", matA[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n--- Matriz B ---\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("%4d ", matB[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n--- Matriz C (A + B) ---\n");
+    for (i = 0; i < LIN; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            printf("%4d ", matC[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
